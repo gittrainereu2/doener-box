@@ -22,6 +22,4 @@ jobs:
 
     - name: Deploy with Helm
       run: |
-# bitte euren namespace eintragen anstelle von default , z.B. euren namen
-# muss eindeutig sein 
         helm upgrade --install my-release ./chart --namespace marco --create-namespace
