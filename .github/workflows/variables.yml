@@ -1,0 +1,25 @@
+name: Variables
+
+on: [push]
+
+env:
+  HANS: 'global'
+
+jobs:
+  example-job1:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo $HANS
+  example-job2:
+    runs-on: ubuntu-latest
+    env:
+      HANS: 'job'
+    steps:
+      - run: echo $HANS
+  example-job3:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Example Step
+        run: echo $HANS
+        env:
+          HANS: 'step-value'
