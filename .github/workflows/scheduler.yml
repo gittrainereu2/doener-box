@@ -1,0 +1,28 @@
+name: Ein Job mit dynamischer Variable je nach Zeitplan
+
+on:
+  schedule:
+    - cron: '*/5 * * * *'   # Montag 08:00 UTC
+    - cron: '*/10 * * * *'  # Freitag 20:00 UTC
+
+jobs:
+  dynamic-message:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Setze MESSAGE je nach Zeitplan
+        id: set-message
+        run: |
+          case "${{ github.event.schedule }}" in
+            '*/5 * * * *')
+              echo "message=Fünfte Minute!" >> $GITHUB_OUTPUT
+              ;;
+            '* * * * *')
+              echo "message=Zehnte Minute!" >> $GITHUB_OUTPUT
+              ;;
+            *)
+              echo "message=Unbekannter Zeitplan" >> $GITHUB_OUTPUT
+              ;;
+          esac
+
+      - name: Ausgabe der Nachricht
+        run: echo "${{ steps.set-message.outputs.message }}"
