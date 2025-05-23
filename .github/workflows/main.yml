@@ -23,4 +23,4 @@ jobs:
 
     - name: Deploy with Helm
       run: |
-        helm upgrade --install my-release ./chart --namespace marco --create-namespace
+        helm upgrade --install my-release ./charts --namespace marco --create-namespace
